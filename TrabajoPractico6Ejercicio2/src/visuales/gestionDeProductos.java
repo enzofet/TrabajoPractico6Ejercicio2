@@ -4,6 +4,8 @@
  */
 package visuales;
 
+import classes.Producto;
+import classes.Rubro;
 import classes.Supermercado;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -37,7 +39,7 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
             txtF_Descripcion.setText(tablaProductos.getValueAt(fila, 1).toString());
             txtF_Precio.setText(tablaProductos.getValueAt(fila, 2).toString());
             stockSpinner.setValue(Integer.parseInt(tablaProductos.getValueAt(fila, 3).toString()));
-            comboBoxRubro.setSelectedItem(tablaProductos.getValueAt(fila, 4).toString());
+            comboBoxRubro.setSelectedItem(tablaProductos.getValueAt(fila, 4));
             habilitarGuardar();
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione un producto para actualizar.");
@@ -47,9 +49,10 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
     private void eliminarProducto() {
         int fila = tablaProductos.getSelectedRow();
         if (fila >= 0) {
-            habilitarGuardar();
+            int codigo = Integer.parseInt(tablaProductos.getValueAt(fila, 0).toString());
             int opcion = JOptionPane.showConfirmDialog(this, "Desea eliminar el producto?", "Eliminar", JOptionPane.YES_NO_OPTION);
             if (opcion == JOptionPane.YES_OPTION) {
+                supermercado.eliminarProducto(codigo);
                 ((DefaultTableModel) tablaProductos.getModel()).removeRow(fila);
                 btnGuardar.setEnabled(false);
             }
@@ -59,12 +62,21 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
     }
 
     private void guardarProducto() {
-        String codigo = txtF_Codigo.getText();
+        int codigo = Integer.parseInt(txtF_Codigo.getText());
+        String nombre = txtF_Descripcion.getText();
         String descripcion = txtF_Descripcion.getText();
         double precio = Double.parseDouble(txtF_Precio.getText());
         int stock = (int) stockSpinner.getValue();
-        String rubro = comboBoxRubro.getSelectedItem().toString();
+        Rubro rubro = (Rubro) comboBoxRubro.getSelectedItem();
 
+        Producto p = new Producto(codigo,nombre,descripcion,precio,rubro);
+        
+        
+        //Se sobreescribe por si ya existe el producto.
+        supermercado.sobreescribirProducto(p);
+        
+        supermercado.anadirProducto(p);
+        
         DefaultTableModel modelo = (DefaultTableModel) tablaProductos.getModel();
         modelo.addRow(new Object[]{codigo, descripcion, precio, stock, rubro});
         
@@ -128,6 +140,11 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
 
         comboBoxFiltrarCategoria.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
         comboBoxFiltrarCategoria.setToolTipText("Filtre por Categoria");
+        comboBoxFiltrarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxFiltrarCategoriaActionPerformed(evt);
+            }
+        });
 
         paneProductos.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
 
@@ -344,6 +361,10 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         eliminarProducto();
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void comboBoxFiltrarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxFiltrarCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxFiltrarCategoriaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
