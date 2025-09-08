@@ -16,6 +16,7 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
     public gestionDeProductos() {
         initComponents();
         DeTodoSA.rellenarComboBox(comboBoxRubro);
+        DeTodoSA.rellenarComboBox(comboBoxFiltrarCategoria);
         this.setClosable(true);
         this.setResizable(true);
         this.setMaximizable(true);
