@@ -154,7 +154,12 @@ public class DeTodoSA extends javax.swing.JFrame {
     }//GEN-LAST:event_consultaPorNombreActionPerformed
 
     private void consultaPorPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPorPrecioActionPerformed
-        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        consultaPorPrecio consultaPorPrecio = new consultaPorPrecio();
+        consultaPorPrecio.setVisible(true);
+        escritorio.add(consultaPorPrecio);
+        escritorio.moveToFront(consultaPorPrecio);
     }//GEN-LAST:event_consultaPorPrecioActionPerformed
 
     private void consultaPorRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPorRubroActionPerformed
