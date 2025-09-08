@@ -85,9 +85,9 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "Producto guardado.");
     }
 
-    private Supermercado supermercado = new Supermercado();
+    private Supermercado supermercado;
     
-    public gestionDeProductos() {
+    public gestionDeProductos(Supermercado supermercado) {
         initComponents();
         DeTodoSA.rellenarComboBox(comboBoxRubro);
         DeTodoSA.rellenarComboBox(comboBoxFiltrarCategoria);
@@ -95,6 +95,9 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
         this.setResizable(true);
         this.setMaximizable(true);
         this.setIconifiable(true);
+        
+        this.supermercado = supermercado;
+        btnGuardar.setEnabled(false);
 
     }
 

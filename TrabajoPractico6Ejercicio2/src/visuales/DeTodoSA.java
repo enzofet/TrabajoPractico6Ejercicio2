@@ -5,6 +5,7 @@
 package visuales;
 
 import classes.Rubro;
+import classes.Supermercado;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
@@ -15,6 +16,8 @@ import javax.swing.table.DefaultTableModel;
  * @author emadupre
  */
 public class DeTodoSA extends javax.swing.JFrame {
+    
+    public static Supermercado supermercado = new Supermercado();
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DeTodoSA.class.getName());
 
@@ -137,7 +140,7 @@ public class DeTodoSA extends javax.swing.JFrame {
 
     private void gestionProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionProductosActionPerformed
         
-        gestionDeProductos gestor = new gestionDeProductos();
+        gestionDeProductos gestor = new gestionDeProductos(DeTodoSA.supermercado);
         
         escritorio.add(gestor);
         
