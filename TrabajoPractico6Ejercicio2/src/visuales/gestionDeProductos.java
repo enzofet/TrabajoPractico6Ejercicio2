@@ -64,7 +64,6 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
         txtFiltrarCategoria.setText("Filtrar por Categoría:");
 
         comboBoxFiltrarCategoria.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
-        comboBoxFiltrarCategoria.setSelectedIndex(-1);
         comboBoxFiltrarCategoria.setToolTipText("Filtre por Categoria");
 
         paneProductos.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N

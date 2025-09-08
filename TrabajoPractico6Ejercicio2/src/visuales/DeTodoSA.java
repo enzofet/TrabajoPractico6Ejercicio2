@@ -7,6 +7,8 @@ package visuales;
 import classes.Rubro;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,6 +28,16 @@ public class DeTodoSA extends javax.swing.JFrame {
         for(int i = 0; i < lista.length; i++){
             modelo.addElement(lista[i].toString());
         }
+    }
+    
+    public static void rellenarCabecerasTablas(JTable tabla){
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Categoría");
+        modelo.addColumn("Stock");
+        tabla.setModel(modelo);
     }
     
     public DeTodoSA() {

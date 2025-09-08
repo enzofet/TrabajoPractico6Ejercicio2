@@ -19,6 +19,7 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
     DefaultComboBoxModel modelo = new DefaultComboBoxModel();
     public consultaPorRubro() {
         initComponents();
+        DeTodoSA.rellenarCabecerasTablas(tblRubros);
         modelo = (DefaultComboBoxModel) cmbRubros.getModel();
         DeTodoSA.rellenarComboBox(cmbRubros);
     }
@@ -38,6 +39,7 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
         cmbRubros = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRubros = new javax.swing.JTable();
+        btnSalir = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Listado por rubro");
@@ -55,8 +57,14 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
 
             }
         ));
-        tblRubros.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setViewportView(tblRubros);
+
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlBuscarRubroLayout = new javax.swing.GroupLayout(pnlBuscarRubro);
         pnlBuscarRubro.setLayout(pnlBuscarRubroLayout);
@@ -79,6 +87,10 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBuscarRubroLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
         pnlBuscarRubroLayout.setVerticalGroup(
             pnlBuscarRubroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,8 +102,10 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
                     .addComponent(cmbRubros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                .addGap(15, 15, 15))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(btnSalir)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -108,8 +122,13 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cmbRubros;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
