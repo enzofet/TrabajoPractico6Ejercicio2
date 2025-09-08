@@ -4,6 +4,9 @@
  */
 package visuales;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author emadupre
@@ -13,6 +16,62 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
     /**
      * Creates new form gestionDeProductos
      */
+    private void habilitarGuardar() {
+        btnGuardar.setEnabled(true);
+    }
+
+    private void nuevoProducto() {
+        txtF_Codigo.setText("");
+        txtF_Descripcion.setText("");
+        txtF_Precio.setText("");
+        stockSpinner.setValue(0);
+        comboBoxRubro.setSelectedIndex(-1);
+        habilitarGuardar();
+    }
+
+    private void actualizarProducto() {
+        int fila = tablaProductos.getSelectedRow();
+        if (fila >= 0) {
+            txtF_Codigo.setText(tablaProductos.getValueAt(fila, 0).toString());
+            txtF_Descripcion.setText(tablaProductos.getValueAt(fila, 1).toString());
+            txtF_Precio.setText(tablaProductos.getValueAt(fila, 2).toString());
+            stockSpinner.setValue(Integer.parseInt(tablaProductos.getValueAt(fila, 3).toString()));
+            comboBoxRubro.setSelectedItem(tablaProductos.getValueAt(fila, 4).toString());
+            habilitarGuardar();
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un producto para actualizar.");
+        }
+    }
+
+    private void eliminarProducto() {
+        int fila = tablaProductos.getSelectedRow();
+        if (fila >= 0) {
+            habilitarGuardar();
+            int opcion = JOptionPane.showConfirmDialog(this, "Desea eliminar el producto?", "Eliminar", JOptionPane.YES_NO_OPTION);
+            if (opcion == JOptionPane.YES_OPTION) {
+                ((DefaultTableModel) tablaProductos.getModel()).removeRow(fila);
+                btnGuardar.setEnabled(false);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un producto para eliminar");
+        }
+    }
+
+    private void guardarProducto() {
+        String codigo = txtF_Codigo.getText();
+        String descripcion = txtF_Descripcion.getText();
+        double precio = Double.parseDouble(txtF_Precio.getText());
+        int stock = (int) stockSpinner.getValue();
+        String rubro = comboBoxRubro.getSelectedItem().toString();
+
+        DefaultTableModel modelo = (DefaultTableModel) tablaProductos.getModel();
+        modelo.addRow(new Object[]{codigo, descripcion, precio, stock, rubro});
+        
+        btnGuardar.setEnabled(false);
+        
+        JOptionPane.showMessageDialog(this, "Producto guardado.");
+    }
+
     public gestionDeProductos() {
         initComponents();
         DeTodoSA.rellenarComboBox(comboBoxRubro);
@@ -21,6 +80,7 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
         this.setResizable(true);
         this.setMaximizable(true);
         this.setIconifiable(true);
+
     }
 
     /**
@@ -178,19 +238,40 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
 
         btnNuevo.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-agregar-a-carrito-de-compras-48.png"))); // NOI18N
-        btnNuevo.setText("Nueva");
+        btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
 
         btnGuardar.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.setEnabled(false);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnActualizar.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
         btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-aprobar-y-actualizar-48.png"))); // NOI18N
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -244,6 +325,22 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

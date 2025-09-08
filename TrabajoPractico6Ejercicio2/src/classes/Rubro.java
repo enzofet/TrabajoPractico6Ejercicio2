@@ -8,6 +8,7 @@ package classes;
  *
  * @author emadupre
  */
+
 public enum Rubro {
     COMESTIBLE("Comestible"),
     LIMPIEZA("Limpieza"),
