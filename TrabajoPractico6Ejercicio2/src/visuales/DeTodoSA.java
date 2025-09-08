@@ -28,21 +28,103 @@ public class DeTodoSA extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        escritorio = new javax.swing.JDesktopPane();
+        menuGestion = new javax.swing.JMenuBar();
+        menuAdministracion = new javax.swing.JMenu();
+        gestionProductos = new javax.swing.JMenuItem();
+        menuConsultas = new javax.swing.JMenu();
+        consultaPorNombre = new javax.swing.JCheckBoxMenuItem();
+        consultaPorPrecio = new javax.swing.JCheckBoxMenuItem();
+        consultaPorRubro = new javax.swing.JCheckBoxMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
+        escritorio.setLayout(escritorioLayout);
+        escritorioLayout.setHorizontalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 936, Short.MAX_VALUE)
+        );
+        escritorioLayout.setVerticalGroup(
+            escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 692, Short.MAX_VALUE)
+        );
+
+        menuAdministracion.setText("Administracion");
+
+        gestionProductos.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        gestionProductos.setText("Gestion de Productos");
+        gestionProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gestionProductosActionPerformed(evt);
+            }
+        });
+        menuAdministracion.add(gestionProductos);
+
+        menuGestion.add(menuAdministracion);
+
+        menuConsultas.setText("Consultas");
+
+        consultaPorNombre.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        consultaPorNombre.setText("Consulta por Nombre");
+        consultaPorNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaPorNombreActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(consultaPorNombre);
+
+        consultaPorPrecio.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        consultaPorPrecio.setText("Consulta por Precio");
+        consultaPorPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaPorPrecioActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(consultaPorPrecio);
+
+        consultaPorRubro.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        consultaPorRubro.setText("Consulta por Rubro");
+        consultaPorRubro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaPorRubroActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(consultaPorRubro);
+
+        menuGestion.add(menuConsultas);
+
+        setJMenuBar(menuGestion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(escritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(escritorio)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void gestionProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionProductosActionPerformed
+        
+    }//GEN-LAST:event_gestionProductosActionPerformed
+
+    private void consultaPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPorNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultaPorNombreActionPerformed
+
+    private void consultaPorPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPorPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultaPorPrecioActionPerformed
+
+    private void consultaPorRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPorRubroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_consultaPorRubroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -70,5 +152,13 @@ public class DeTodoSA extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBoxMenuItem consultaPorNombre;
+    private javax.swing.JCheckBoxMenuItem consultaPorPrecio;
+    private javax.swing.JCheckBoxMenuItem consultaPorRubro;
+    private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenuItem gestionProductos;
+    private javax.swing.JMenu menuAdministracion;
+    private javax.swing.JMenu menuConsultas;
+    private javax.swing.JMenuBar menuGestion;
     // End of variables declaration//GEN-END:variables
 }

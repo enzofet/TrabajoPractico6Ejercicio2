@@ -26,15 +26,217 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtGestionProductos = new javax.swing.JLabel();
+        txtFiltrarCategoria = new javax.swing.JLabel();
+        comboBoxFiltrarCategoria = new javax.swing.JComboBox<>();
+        paneProductos = new javax.swing.JScrollPane();
+        tablaProductos = new javax.swing.JTable();
+        panelProductos = new javax.swing.JPanel();
+        txtCodigo = new javax.swing.JLabel();
+        txtDescripcion = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JLabel();
+        txtRubro = new javax.swing.JLabel();
+        txtStock = new javax.swing.JLabel();
+        stockSpinner = new javax.swing.JSpinner();
+        comboBoxRubro = new javax.swing.JComboBox<>();
+        txtF_Precio = new javax.swing.JTextField();
+        txtF_Descripcion = new javax.swing.JTextField();
+        txtF_Codigo = new javax.swing.JTextField();
+        btnNuevo = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+
+        setTitle("De todo S.A - Productos");
+
+        txtGestionProductos.setFont(new java.awt.Font("URW Gothic", 0, 18)); // NOI18N
+        txtGestionProductos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtGestionProductos.setText("Gestión de Productos");
+
+        txtFiltrarCategoria.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        txtFiltrarCategoria.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtFiltrarCategoria.setText("Filtrar por Categoría:");
+
+        comboBoxFiltrarCategoria.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        comboBoxFiltrarCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comestible", "Limpieza", "Perfumería" }));
+        comboBoxFiltrarCategoria.setSelectedIndex(-1);
+        comboBoxFiltrarCategoria.setToolTipText("Filtre por Categoria");
+
+        paneProductos.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+
+        tablaProductos.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Descripcion", "Precio", "Categoria", "Stock"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        paneProductos.setViewportView(tablaProductos);
+
+        panelProductos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txtCodigo.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        txtCodigo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtCodigo.setText("Codigo:");
+
+        txtDescripcion.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        txtDescripcion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtDescripcion.setText("Descripcion:");
+
+        txtPrecio.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        txtPrecio.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtPrecio.setText("Precio:");
+
+        txtRubro.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        txtRubro.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtRubro.setText("Rubro:");
+
+        txtStock.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        txtStock.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtStock.setText("Stock:");
+
+        stockSpinner.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+
+        comboBoxRubro.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        comboBoxRubro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comestible", "Limpieza", "Perfumería" }));
+
+        txtF_Precio.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+
+        txtF_Descripcion.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+
+        txtF_Codigo.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+
+        javax.swing.GroupLayout panelProductosLayout = new javax.swing.GroupLayout(panelProductos);
+        panelProductos.setLayout(panelProductosLayout);
+        panelProductosLayout.setHorizontalGroup(
+            panelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProductosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtRubro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(panelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(comboBoxRubro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(stockSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtF_Precio)
+                    .addComponent(txtF_Descripcion)
+                    .addComponent(txtF_Codigo))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelProductosLayout.setVerticalGroup(
+            panelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProductosLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(panelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCodigo)
+                    .addComponent(txtF_Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDescripcion)
+                    .addComponent(txtF_Descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPrecio)
+                    .addComponent(txtF_Precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRubro)
+                    .addComponent(comboBoxRubro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtStock)
+                    .addComponent(stockSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        btnNuevo.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-agregar-a-carrito-de-compras-48.png"))); // NOI18N
+        btnNuevo.setText("Nueva");
+
+        btnGuardar.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/guardar.png"))); // NOI18N
+        btnGuardar.setText("Guardar");
+
+        btnActualizar.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8-aprobar-y-actualizar-48.png"))); // NOI18N
+        btnActualizar.setText("Actualizar");
+
+        btnEliminar.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
+        btnEliminar.setText("Eliminar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addComponent(txtGestionProductos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(156, 156, 156)
+                .addComponent(btnNuevo)
+                .addGap(18, 18, 18)
+                .addComponent(btnGuardar)
+                .addGap(18, 18, 18)
+                .addComponent(btnActualizar)
+                .addGap(18, 18, 18)
+                .addComponent(btnEliminar)
+                .addGap(0, 63, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelProductos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(paneProductos))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(txtFiltrarCategoria)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboBoxFiltrarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(203, 203, 203))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(txtGestionProductos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFiltrarCategoria)
+                    .addComponent(comboBoxFiltrarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(paneProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNuevo)
+                    .addComponent(btnGuardar)
+                    .addComponent(btnActualizar)
+                    .addComponent(btnEliminar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -42,5 +244,25 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnNuevo;
+    private javax.swing.JComboBox<String> comboBoxFiltrarCategoria;
+    private javax.swing.JComboBox<String> comboBoxRubro;
+    private javax.swing.JScrollPane paneProductos;
+    private javax.swing.JPanel panelProductos;
+    private javax.swing.JSpinner stockSpinner;
+    private javax.swing.JTable tablaProductos;
+    private javax.swing.JLabel txtCodigo;
+    private javax.swing.JLabel txtDescripcion;
+    private javax.swing.JTextField txtF_Codigo;
+    private javax.swing.JTextField txtF_Descripcion;
+    private javax.swing.JTextField txtF_Precio;
+    private javax.swing.JLabel txtFiltrarCategoria;
+    private javax.swing.JLabel txtGestionProductos;
+    private javax.swing.JLabel txtPrecio;
+    private javax.swing.JLabel txtRubro;
+    private javax.swing.JLabel txtStock;
     // End of variables declaration//GEN-END:variables
 }
