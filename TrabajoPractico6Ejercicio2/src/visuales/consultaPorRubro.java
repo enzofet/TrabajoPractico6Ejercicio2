@@ -4,6 +4,9 @@
  */
 package visuales;
 
+import classes.Rubro;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author emadupre
@@ -13,8 +16,11 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
     /**
      * Creates new form consultaPorRubro
      */
+    DefaultComboBoxModel modelo = new DefaultComboBoxModel();
     public consultaPorRubro() {
         initComponents();
+        modelo = (DefaultComboBoxModel) cmbRubros.getModel();
+        DeTodoSA.rellenarComboBox(cmbRubros);
     }
 
     /**
@@ -29,16 +35,16 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
         pnlBuscarRubro = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbRubros = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblRubros = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Listado por rubro");
 
         jLabel2.setText("Rubro:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblRubros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -49,8 +55,8 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
 
             }
         ));
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        jScrollPane1.setViewportView(jTable1);
+        tblRubros.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane1.setViewportView(tblRubros);
 
         javax.swing.GroupLayout pnlBuscarRubroLayout = new javax.swing.GroupLayout(pnlBuscarRubro);
         pnlBuscarRubro.setLayout(pnlBuscarRubroLayout);
@@ -64,7 +70,7 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
                                 .addGap(42, 42, 42)
                                 .addComponent(jLabel2)
                                 .addGap(38, 38, 38)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cmbRubros, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pnlBuscarRubroLayout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -81,7 +87,7 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addGroup(pnlBuscarRubroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbRubros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
@@ -104,11 +110,11 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cmbRubros;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JPanel pnlBuscarRubro;
+    private javax.swing.JTable tblRubros;
     // End of variables declaration//GEN-END:variables
 }

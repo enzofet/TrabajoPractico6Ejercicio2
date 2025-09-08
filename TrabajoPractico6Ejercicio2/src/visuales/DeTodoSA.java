@@ -4,6 +4,10 @@
  */
 package visuales;
 
+import classes.Rubro;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+
 /**
  *
  * @author emadupre
@@ -15,6 +19,15 @@ public class DeTodoSA extends javax.swing.JFrame {
     /**
      * Creates new form A
      */
+
+    public static void rellenarComboBox(JComboBox box){
+        DefaultComboBoxModel modelo = (DefaultComboBoxModel) box.getModel();
+        Rubro[] lista = Rubro.values();
+        for(int i = 0; i < lista.length; i++){
+            modelo.addElement(lista[i].toString());
+        }
+    }
+    
     public DeTodoSA() {
         initComponents();
     }
@@ -120,7 +133,12 @@ public class DeTodoSA extends javax.swing.JFrame {
     }//GEN-LAST:event_gestionProductosActionPerformed
 
     private void consultaPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPorNombreActionPerformed
-        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        consultaPorNombre consultaPorNombre = new consultaPorNombre();
+        consultaPorNombre.setVisible(true);
+        escritorio.add(consultaPorNombre);
+        escritorio.moveToFront(consultaPorNombre);
     }//GEN-LAST:event_consultaPorNombreActionPerformed
 
     private void consultaPorPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPorPrecioActionPerformed
@@ -128,7 +146,12 @@ public class DeTodoSA extends javax.swing.JFrame {
     }//GEN-LAST:event_consultaPorPrecioActionPerformed
 
     private void consultaPorRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPorRubroActionPerformed
-        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        consultaPorRubro consultaPorRubro = new consultaPorRubro();
+        consultaPorRubro.setVisible(true);
+        escritorio.add(consultaPorRubro);
+        escritorio.moveToFront(consultaPorRubro);
     }//GEN-LAST:event_consultaPorRubroActionPerformed
 
     /**
