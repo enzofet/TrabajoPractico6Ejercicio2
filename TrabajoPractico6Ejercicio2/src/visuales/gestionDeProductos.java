@@ -4,6 +4,7 @@
  */
 package visuales;
 
+import classes.Supermercado;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -72,6 +73,8 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(this, "Producto guardado.");
     }
 
+    private Supermercado supermercado = new Supermercado();
+    
     public gestionDeProductos() {
         initComponents();
         DeTodoSA.rellenarComboBox(comboBoxRubro);
@@ -327,19 +330,19 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        // TODO add your handling code here:
+        nuevoProducto();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        guardarProducto();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
+        actualizarProducto();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        eliminarProducto();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
 
