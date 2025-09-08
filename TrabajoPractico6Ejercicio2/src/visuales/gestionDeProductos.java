@@ -64,7 +64,6 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
         txtFiltrarCategoria.setText("Filtrar por Categoría:");
 
         comboBoxFiltrarCategoria.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
-        comboBoxFiltrarCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comestible", "Limpieza", "Perfumería" }));
         comboBoxFiltrarCategoria.setSelectedIndex(-1);
         comboBoxFiltrarCategoria.setToolTipText("Filtre por Categoria");
 
@@ -124,7 +123,6 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
         stockSpinner.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
 
         comboBoxRubro.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
-        comboBoxRubro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Comestible", "Limpieza", "Perfumería" }));
 
         txtF_Precio.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
 
