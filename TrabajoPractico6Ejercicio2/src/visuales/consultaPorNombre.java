@@ -4,6 +4,10 @@
  */
 package visuales;
 
+import classes.Producto;
+import classes.Supermercado;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,9 +19,36 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
     /**
      * Creates new form consultaPorNombre
      */
+    private Supermercado supermercado;
     DefaultTableModel modelo = new DefaultTableModel();
+    private void buscarPorNombre(){
+         DefaultTableModel modelo = (DefaultTableModel) jtblProductos.getModel();
+         modelo.setRowCount(0);
+        String nombre = txtDescripcion.getText().trim();
+        if ( nombre.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Ingrese nombre producto");
+            return;
+     
+        }
+        List<Producto> encontrados = supermercado.buscarPorNombre(nombre);
+         if ( encontrados.isEmpty()){
+            JOptionPane.showMessageDialog(this, "No se encontró producto");
+         }
+         else {
+             for ( Producto p : encontrados){
+                 modelo.addRow(new Object []{
+                     p.getCodigo(),
+                     p.getNombre(),
+                     p.getPrecio(),
+                     p.getRubro(),
+                    0
+                 });
+             }
+         }
+    }
     public consultaPorNombre() {
         initComponents();
+        this.supermercado= supermercado;
         DeTodoSA.rellenarCabecerasTablas(jtblProductos);
     }
 
@@ -38,9 +69,16 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
         lblInstruccion = new javax.swing.JLabel();
         imgLupa = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
+        btnBuscarPorNombre = new javax.swing.JButton();
 
         lblTitulo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         lblTitulo.setText("Listado por nombre");
+
+        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescripcionActionPerformed(evt);
+            }
+        });
 
         jtblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -66,21 +104,17 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
             }
         });
 
+        btnBuscarPorNombre.setText("Buscar");
+        btnBuscarPorNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarPorNombreActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblInstruccion, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(imgLupa)
-                .addGap(81, 81, 81))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,6 +125,22 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnBuscarPorNombre))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblInstruccion, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(imgLupa)))
+                .addGap(81, 81, 81))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,8 +153,10 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(imgLupa)))
-                .addGap(12, 12, 12)
-                .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarPorNombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
@@ -130,8 +182,18 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescripcionActionPerformed
+
+    private void btnBuscarPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPorNombreActionPerformed
+           buscarPorNombre();
+           
+    }//GEN-LAST:event_btnBuscarPorNombreActionPerformed
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarPorNombre;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel imgLupa;
     private javax.swing.JPanel jPanel1;
