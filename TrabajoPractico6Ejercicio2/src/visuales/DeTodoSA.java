@@ -112,6 +112,11 @@ public class DeTodoSA extends javax.swing.JFrame {
 
     private void gestionProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionProductosActionPerformed
         
+        gestionDeProductos gestor = new gestionDeProductos();
+        
+        escritorio.add(gestor);
+        
+        gestor.setVisible(true);
     }//GEN-LAST:event_gestionProductosActionPerformed
 
     private void consultaPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPorNombreActionPerformed
