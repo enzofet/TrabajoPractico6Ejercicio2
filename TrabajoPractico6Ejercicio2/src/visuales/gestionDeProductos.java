@@ -20,6 +20,8 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
     /**
      * Creates new form gestionDeProductos
      */
+    DefaultTableModel modelo = new DefaultTableModel();
+
     private void habilitarGuardar() {
         btnGuardar.setEnabled(true);
     }
@@ -53,7 +55,7 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
             int codigo = Integer.parseInt(tablaProductos.getValueAt(fila, 0).toString());
             int opcion = JOptionPane.showConfirmDialog(this, "Desea eliminar el producto?", "Eliminar", JOptionPane.YES_NO_OPTION);
             if (opcion == JOptionPane.YES_OPTION) {
-                supermercado.eliminarProducto(codigo);
+                DeTodoSA.supermercado.eliminarProducto(codigo);
                 ((DefaultTableModel) tablaProductos.getModel()).removeRow(fila);
                 btnGuardar.setEnabled(false);
             }
@@ -63,53 +65,62 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
     }
 
     private void guardarProducto() {
-        int codigo = Integer.parseInt(txtF_Codigo.getText());
-        String nombre = txtF_Descripcion.getText();
-        String descripcion = txtF_Descripcion.getText();
-        double precio = Double.parseDouble(txtF_Precio.getText());
-        int stock = (int) stockSpinner.getValue();
-        Rubro rubro = (Rubro) comboBoxRubro.getSelectedItem();
+        try {
+            int codigo = Integer.parseInt(txtF_Codigo.getText());
+            String descripcion = txtF_Descripcion.getText();
+            double precio = Double.parseDouble(txtF_Precio.getText());
+            int stock = (int) stockSpinner.getValue();
+            Rubro rubro = null;
+            String seleccionado = (String) comboBoxFiltrarCategoria.getSelectedItem();
+            switch (seleccionado) {
+                case "Limpieza":
+                    rubro = Rubro.LIMPIEZA;
+                    break;
+                case "Perfumeria":
+                    rubro = Rubro.PERFUMERIA;
+                    break;
+                case "Comestible":
+                    rubro = Rubro.COMESTIBLE;
+                    break;
+            }
+            Producto p = new Producto(codigo, descripcion, precio, rubro, stock);
+            DeTodoSA.supermercado.sobreescribirProducto(p);
+            DeTodoSA.supermercado.anadirProducto(p);
+            JOptionPane.showMessageDialog(this, "Producto guardado.");
+        } catch (NumberFormatException a) {
+            JOptionPane.showMessageDialog(this, "Formato incorrecto de datos.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        Producto p = new Producto(codigo,descripcion,precio,rubro,stock);
-        
-        
         //Se sobreescribe por si ya existe el producto.
-        supermercado.sobreescribirProducto(p);
-        
-        supermercado.anadirProducto(p);
-        
-        DefaultTableModel modelo = (DefaultTableModel) tablaProductos.getModel();
-        modelo.addRow(new Object[]{codigo, descripcion, precio, stock, rubro});
-        
         btnGuardar.setEnabled(false);
-        
-        JOptionPane.showMessageDialog(this, "Producto guardado.");
+
     }
-    
-    public void rellenarTabla(ArrayList<Producto> productos){
-        try{
-            DefaultTableModel modelo = (DefaultTableModel) tablaProductos.getModel();
+
+    public void rellenarTabla(ArrayList<Producto> productos) {
+        try {
+            modelo = (DefaultTableModel) tablaProductos.getModel();
             modelo.setRowCount(0);
-            for(Producto p : productos){
+            for (Producto p : productos) {
                 modelo.addRow(new Object[]{p.getCodigo(), p.getDescripcion(), p.getPrecio(), p.getRubro(), p.getStock()});
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private Supermercado supermercado;
-    
     public gestionDeProductos(Supermercado supermercado) {
         initComponents();
+        DeTodoSA.rellenarCabecerasTablas(tablaProductos);
         DeTodoSA.rellenarComboBox(comboBoxRubro);
         DeTodoSA.rellenarComboBox(comboBoxFiltrarCategoria);
+        rellenarTabla(new ArrayList<>(supermercado.getCatalogo()));
         this.setClosable(true);
         this.setResizable(true);
         this.setMaximizable(true);
         this.setIconifiable(true);
-        
-        this.supermercado = supermercado;
+
         btnGuardar.setEnabled(false);
 
     }
@@ -167,30 +178,15 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
         tablaProductos.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Codigo", "Descripcion", "Precio", "Categoria", "Stock"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         paneProductos.setViewportView(tablaProductos);
 
         panelProductos.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -380,18 +376,24 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
 
     private void comboBoxFiltrarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxFiltrarCategoriaActionPerformed
         String seleccionado = (String) comboBoxFiltrarCategoria.getSelectedItem();
-        if(seleccionado.equals("Limpieza")){
-            ArrayList<Producto> filtrado = DeTodoSA.supermercado.buscarProductosRubro(Rubro.LIMPIEZA);
-            rellenarTabla(filtrado);
+
+        ArrayList<Producto> filtrado;
+        switch (seleccionado) {
+            case "Limpieza":
+                filtrado = DeTodoSA.supermercado.buscarProductosRubro(Rubro.LIMPIEZA);
+                break;
+            case "Comestible":
+                filtrado = DeTodoSA.supermercado.buscarProductosRubro(Rubro.COMESTIBLE);
+                break;
+            case "Perfumeria":
+                filtrado = DeTodoSA.supermercado.buscarProductosRubro(Rubro.PERFUMERIA);
+                break;
+            default:
+                filtrado = new ArrayList();
+                break;
         }
-        if(seleccionado.equals("Comestible")){
-            ArrayList<Producto> filtrado = DeTodoSA.supermercado.buscarProductosRubro(Rubro.PERFUMERIA);
-            rellenarTabla(filtrado);
-        }
-        if(seleccionado.equals("Perfumeria")){
-            ArrayList<Producto> filtrado = DeTodoSA.supermercado.buscarProductosRubro(Rubro.COMESTIBLE);
-            rellenarTabla(filtrado);
-        }
+        rellenarTabla(filtrado);
+
     }//GEN-LAST:event_comboBoxFiltrarCategoriaActionPerformed
 
 

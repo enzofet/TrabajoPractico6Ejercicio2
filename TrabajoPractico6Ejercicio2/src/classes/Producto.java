@@ -11,7 +11,7 @@ import java.util.Comparator;
  *
  * @author Enzo_2
  */
-public class Producto implements Comparator<Producto> {
+public class Producto implements Comparator<Producto>, Comparable<Producto> {
 
     private String descripcion;
     private double precio;
@@ -67,6 +67,8 @@ public class Producto implements Comparator<Producto> {
         this.codigo = codigo;
     }
 
+    
+    
     @Override
     public int compare(Producto t, Producto t1) {
         if (t.getCodigo() < t1.getCodigo()) {
@@ -98,6 +100,11 @@ public class Producto implements Comparator<Producto> {
     @Override
     public String toString() {
         return "Producto (" + "codigo = " + codigo + " | " + " descripcion = " + descripcion + " | " + "precio = " + precio + " | rubro = " + rubro + ")";
+    }
+
+    @Override
+    public int compareTo(Producto t) {
+        return Integer.compare(this.codigo, t.codigo);
     }
 
 }

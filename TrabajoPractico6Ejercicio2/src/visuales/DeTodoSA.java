@@ -139,12 +139,12 @@ public class DeTodoSA extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void gestionProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionProductosActionPerformed
-        
+        escritorio.removeAll();
+        escritorio.repaint();
         gestionDeProductos gestor = new gestionDeProductos(DeTodoSA.supermercado);
-        
         escritorio.add(gestor);
-        
         gestor.setVisible(true);
+        escritorio.moveToFront(gestor);
     }//GEN-LAST:event_gestionProductosActionPerformed
 
     private void consultaPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaPorNombreActionPerformed

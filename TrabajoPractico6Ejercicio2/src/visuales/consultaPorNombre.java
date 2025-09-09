@@ -38,16 +38,17 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
              for ( Producto p : encontrados){
                  modelo.addRow(new Object []{
                      p.getCodigo(),
+                     p.getDescripcion(),
                      p.getPrecio(),
                      p.getRubro(),
-                    0
+                    p.getStock(),
                  });
              }
          }
     }
     public consultaPorNombre() {
         initComponents();
-        this.supermercado= supermercado;
+        this.supermercado = DeTodoSA.supermercado;
         DeTodoSA.rellenarCabecerasTablas(jtblProductos);
     }
 
