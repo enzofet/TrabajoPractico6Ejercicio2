@@ -41,11 +41,16 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
         tblRubros = new javax.swing.JTable();
         btnSalir = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel1.setText("Listado por rubro");
+        jLabel1.setFont(new java.awt.Font("URW Gothic", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Listado por Rubro");
 
+        jLabel2.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
         jLabel2.setText("Rubro:");
 
+        cmbRubros.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+
+        tblRubros.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
         tblRubros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -59,6 +64,7 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tblRubros);
 
+        btnSalir.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,42 +76,39 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
         pnlBuscarRubro.setLayout(pnlBuscarRubroLayout);
         pnlBuscarRubroLayout.setHorizontalGroup(
             pnlBuscarRubroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlBuscarRubroLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnlBuscarRubroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlBuscarRubroLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBuscarRubroLayout.createSequentialGroup()
+                        .addGap(0, 122, Short.MAX_VALUE)
                         .addGroup(pnlBuscarRubroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlBuscarRubroLayout.createSequentialGroup()
-                                .addGap(42, 42, 42)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBuscarRubroLayout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(38, 38, 38)
-                                .addComponent(cmbRubros, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlBuscarRubroLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 164, Short.MAX_VALUE))
-                    .addGroup(pnlBuscarRubroLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBuscarRubroLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbRubros, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(100, 100, 100))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlBuscarRubroLayout.createSequentialGroup()
+                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))))
         );
         pnlBuscarRubroLayout.setVerticalGroup(
             pnlBuscarRubroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBuscarRubroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(pnlBuscarRubroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbRubros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSalir)
-                .addContainerGap())
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
