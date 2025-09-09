@@ -21,29 +21,78 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
      * Creates new form gestionDeProductos
      */
     DefaultTableModel modelo = new DefaultTableModel();
+    private Producto productoActual = null;
 
     private void habilitarGuardar() {
         btnGuardar.setEnabled(true);
     }
 
     private void nuevoProducto() {
-        txtF_Codigo.setText("");
-        txtF_Descripcion.setText("");
-        txtF_Precio.setText("");
-        stockSpinner.setValue(0);
-        comboBoxRubro.setSelectedIndex(-1);
-        habilitarGuardar();
+        try {
+            int codigo = Integer.parseInt(txtF_Codigo.getText());
+            String descripcion = txtF_Descripcion.getText();
+            double precio = Double.parseDouble(txtF_Precio.getText());
+            int stock = (int) stockSpinner.getValue();
+
+            Rubro rubro = null;
+
+            String seleccionado = (String) comboBoxRubro.getSelectedItem();
+            if ("Limpieza".equals(seleccionado)) {
+                rubro = Rubro.LIMPIEZA;
+            }
+            if ("Perfumeria".equals(seleccionado)) {
+                rubro = Rubro.PERFUMERIA;
+            }
+            if ("Comestible".equals(seleccionado)) {
+                rubro = Rubro.COMESTIBLE;
+            }
+
+            productoActual = new Producto(codigo, descripcion, precio, rubro, stock);
+
+            JOptionPane.showMessageDialog(this, "Producto Creado. Presiona Guardar para confirmar.");
+            btnGuardar.setEnabled(true);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Complete correctamente los campos numericos.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al crear el producto" + e.getMessage());
+        }
     }
 
     private void actualizarProducto() {
         int fila = tablaProductos.getSelectedRow();
         if (fila >= 0) {
+
             txtF_Codigo.setText(tablaProductos.getValueAt(fila, 0).toString());
             txtF_Descripcion.setText(tablaProductos.getValueAt(fila, 1).toString());
             txtF_Precio.setText(tablaProductos.getValueAt(fila, 2).toString());
-            stockSpinner.setValue(Integer.parseInt(tablaProductos.getValueAt(fila, 3).toString()));
-            comboBoxRubro.setSelectedItem(tablaProductos.getValueAt(fila, 4));
+            stockSpinner.setValue(Integer.parseInt(tablaProductos.getValueAt(fila, 4).toString()));
+
+            String rubroTextoTabla = tablaProductos.getValueAt(fila, 3).toString();
+            for (int i = 0; i < comboBoxRubro.getItemCount(); i++) {
+                String rubroCombo = comboBoxRubro.getItemAt(i).toString();
+                if (rubroCombo.equalsIgnoreCase(rubroTextoTabla)) {
+                    comboBoxRubro.setSelectedIndex(i);
+                    break;
+                }
+            }
+            
+            int codigo = Integer.parseInt(tablaProductos.getValueAt(fila, 0).toString());
+            String descripcion = tablaProductos.getValueAt(fila, 1).toString();
+            double precio = Double.parseDouble(tablaProductos.getValueAt(fila, 2).toString());
+            int stock = Integer.parseInt(tablaProductos.getValueAt(fila, 4).toString());
+            
+            Rubro rubro = null;
+            for(Rubro r : Rubro.values()){
+                if(r.toString().equalsIgnoreCase(rubroTextoTabla)){
+                    rubro = r;
+                    break;
+                }
+            }
+            
+            productoActual = new Producto(codigo,descripcion,precio,rubro,stock);
+            
             habilitarGuardar();
+
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione un producto para actualizar.");
         }
@@ -58,6 +107,7 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
                 DeTodoSA.supermercado.eliminarProducto(codigo);
                 ((DefaultTableModel) tablaProductos.getModel()).removeRow(fila);
                 btnGuardar.setEnabled(false);
+                productoActual = null;
             }
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione un producto para eliminar");
@@ -65,31 +115,52 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
     }
 
     private void guardarProducto() {
+
+        if (productoActual == null) {
+            JOptionPane.showMessageDialog(this, "Primero cree un producto con el botón Nuevo.");
+            return;
+        }
+
         try {
+            
             int codigo = Integer.parseInt(txtF_Codigo.getText());
             String descripcion = txtF_Descripcion.getText();
             double precio = Double.parseDouble(txtF_Precio.getText());
             int stock = (int) stockSpinner.getValue();
+            
             Rubro rubro = null;
-            String seleccionado = (String) comboBoxFiltrarCategoria.getSelectedItem();
-            switch (seleccionado) {
-                case "Limpieza":
-                    rubro = Rubro.LIMPIEZA;
+            String rubroTexto = (String) comboBoxRubro.getSelectedItem();
+            for(Rubro r : Rubro.values()){
+                if(r.toString().equalsIgnoreCase(rubroTexto)){
+                    rubro = r;
                     break;
-                case "Perfumeria":
-                    rubro = Rubro.PERFUMERIA;
-                    break;
-                case "Comestible":
-                    rubro = Rubro.COMESTIBLE;
-                    break;
+                }
             }
-            Producto p = new Producto(codigo, descripcion, precio, rubro, stock);
-            DeTodoSA.supermercado.sobreescribirProducto(p);
-            DeTodoSA.supermercado.anadirProducto(p);
-            JOptionPane.showMessageDialog(this, "Producto guardado.");
-        } catch (NumberFormatException a) {
-            JOptionPane.showMessageDialog(this, "Formato incorrecto de datos.");
+            
+            productoActual.setCodigo(codigo);
+            productoActual.setDescripcion(descripcion);
+            productoActual.setPrecio(precio);
+            productoActual.setStock(stock);
+            productoActual.setRubro(rubro);
+            
+            DeTodoSA.supermercado.sobreescribirProducto(productoActual);
+            DeTodoSA.supermercado.anadirProducto(productoActual);
+
+            JOptionPane.showMessageDialog(this, "Producto guardado en Supermercado DeTodo - S.A");
+
+            rellenarTabla(new ArrayList<>(DeTodoSA.supermercado.getCatalogo()));
+            
+
+            txtF_Codigo.setText("");
+            txtF_Descripcion.setText("");
+            txtF_Precio.setText("");
+            stockSpinner.setValue(0);
+            comboBoxRubro.setSelectedIndex(-1);
+            btnGuardar.setEnabled(false);
+            productoActual = null;
+
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar." + e.getMessage());
             e.printStackTrace();
         }
 
