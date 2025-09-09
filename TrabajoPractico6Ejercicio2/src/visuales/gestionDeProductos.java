@@ -7,6 +7,7 @@ package visuales;
 import classes.Producto;
 import classes.Rubro;
 import classes.Supermercado;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -69,7 +70,7 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
         int stock = (int) stockSpinner.getValue();
         Rubro rubro = (Rubro) comboBoxRubro.getSelectedItem();
 
-        Producto p = new Producto(codigo,nombre,descripcion,precio,rubro);
+        Producto p = new Producto(codigo,descripcion,precio,rubro,stock);
         
         
         //Se sobreescribe por si ya existe el producto.
@@ -83,6 +84,18 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
         btnGuardar.setEnabled(false);
         
         JOptionPane.showMessageDialog(this, "Producto guardado.");
+    }
+    
+    public void rellenarTabla(ArrayList<Producto> productos){
+        try{
+            DefaultTableModel modelo = (DefaultTableModel) tablaProductos.getModel();
+            modelo.setRowCount(0);
+            for(Producto p : productos){
+                modelo.addRow(new Object[]{p.getCodigo(), p.getDescripcion(), p.getPrecio(), p.getRubro(), p.getStock()});
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private Supermercado supermercado;
@@ -366,7 +379,19 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void comboBoxFiltrarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxFiltrarCategoriaActionPerformed
-        // TODO add your handling code here:
+        String seleccionado = (String) comboBoxFiltrarCategoria.getSelectedItem();
+        if(seleccionado.equals("Limpieza")){
+            ArrayList<Producto> filtrado = DeTodoSA.supermercado.buscarProductosRubro(Rubro.LIMPIEZA);
+            rellenarTabla(filtrado);
+        }
+        if(seleccionado.equals("Comestible")){
+            ArrayList<Producto> filtrado = DeTodoSA.supermercado.buscarProductosRubro(Rubro.PERFUMERIA);
+            rellenarTabla(filtrado);
+        }
+        if(seleccionado.equals("Perfumeria")){
+            ArrayList<Producto> filtrado = DeTodoSA.supermercado.buscarProductosRubro(Rubro.COMESTIBLE);
+            rellenarTabla(filtrado);
+        }
     }//GEN-LAST:event_comboBoxFiltrarCategoriaActionPerformed
 
 

@@ -13,17 +13,25 @@ import java.util.Comparator;
  */
 public class Producto implements Comparator<Producto> {
 
-    private String nombre, descripcion;
+    private String descripcion;
     private double precio;
-    private int codigo;
+    private int codigo, stock;
     private Rubro rubro;
 
-    public Producto(int codigo, String nombre, String descripcion, double precio, Rubro rubro) {
-        this.nombre = nombre;
+    public Producto(int codigo, String descripcion, double precio, Rubro rubro, int stock) {
         this.descripcion = descripcion;
         this.precio = precio;
         this.codigo = codigo;
         this.rubro = rubro;
+        this.stock = stock;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
     public Rubro getRubro() {
@@ -34,14 +42,7 @@ public class Producto implements Comparator<Producto> {
         this.rubro = rubro;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
+    
     public String getDescripcion() {
         return descripcion;
     }
@@ -96,7 +97,7 @@ public class Producto implements Comparator<Producto> {
 
     @Override
     public String toString() {
-        return "Producto (" + "codigo = " + codigo + ", nombre = " + nombre + " | " + " descripcion = " + descripcion + " | " + "precio = " + precio + " | rubro = " + rubro + ")";
+        return "Producto (" + "codigo = " + codigo + " | " + " descripcion = " + descripcion + " | " + "precio = " + precio + " | rubro = " + rubro + ")";
     }
 
 }

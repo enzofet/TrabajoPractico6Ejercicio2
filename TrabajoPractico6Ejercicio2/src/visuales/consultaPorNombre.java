@@ -38,7 +38,6 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
              for ( Producto p : encontrados){
                  modelo.addRow(new Object []{
                      p.getCodigo(),
-                     p.getNombre(),
                      p.getPrecio(),
                      p.getRubro(),
                     0

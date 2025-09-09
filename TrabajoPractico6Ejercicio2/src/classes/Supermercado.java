@@ -6,7 +6,7 @@
 package classes;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 import java.util.TreeSet;
 
 /**
@@ -18,6 +18,7 @@ public class Supermercado {
     private TreeSet<Producto> catalogo;
 
     public Supermercado() {
+        this.catalogo = new TreeSet<>();
     }
 
     public void anadirProducto(Producto p) {
@@ -25,29 +26,31 @@ public class Supermercado {
     }
 
     public void sobreescribirProducto(Producto p) {
-        for (Producto producto : catalogo) {
-            if (producto.equals(p.getCodigo())) {
-                catalogo.remove(producto);
-                catalogo.add(p);
+        Iterator<Producto> iterador = catalogo.iterator();
+        while(iterador.hasNext()){
+            Producto producto = iterador.next();
+            if (producto.getCodigo() == p.getCodigo()) {
+                iterador.remove();
             }
         }
+        catalogo.add(p);
 
     }
     
-    public List buscarPorPrecio(double precioMin, double precioMax){
-        List<Producto> productos = new ArrayList();
+    public ArrayList<Producto> buscarPorPrecio(double precioMin, double precioMax){
+        ArrayList<Producto> productos = new ArrayList();
         for(Producto p : catalogo){
-            if(p.getPrecio() > precioMin && p.getCodigo() < precioMax){
+            if(p.getPrecio() >= precioMin && p.getCodigo() <= precioMax){
                 productos.add(p);
             }
         }
         return productos;
     }
     
-    public List buscarPorNombre(String nombre){
-        List<Producto> productos = new ArrayList();
+   public ArrayList<Producto> buscarPorNombre(String nombre){
+        ArrayList<Producto> productos = new ArrayList();
         for(Producto p : catalogo){
-            if(p.getNombre().equalsIgnoreCase(nombre)){
+            if(p.getDescripcion().equalsIgnoreCase(nombre)){
                 productos.add(p);
             }
         }
@@ -56,18 +59,21 @@ public class Supermercado {
     }
 
     public void eliminarProducto(int codigo) {
-        for (Producto p : catalogo) {
-            if (codigo == p.getCodigo()) {
-                catalogo.remove(p);
+        Iterator<Producto> iterador = catalogo.iterator();
+        while(iterador.hasNext()){
+            Producto p = iterador.next();
+            if(p.getCodigo() == codigo){
+                iterador.remove();
+                break;
             }
         }
     }
 
-    public List buscarProductosRubro(Rubro rubro) {
-        List<Producto> productos = new ArrayList();
+    public ArrayList<Producto> buscarProductosRubro(Rubro rubro) {
+        ArrayList<Producto> productos = new ArrayList();
         for (Producto p : catalogo) {
-            if (p.getRubro() == rubro) {
-                productos.add(p);
+            if(p.getRubro() == rubro){
+            productos.add(p);
             }
         }
         return productos;
