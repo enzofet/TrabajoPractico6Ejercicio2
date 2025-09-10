@@ -4,15 +4,62 @@
  */
 package visuales;
 
+import classes.Producto;
+import classes.Supermercado;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author emadupre
  */
 public class consultaPorPrecio extends javax.swing.JInternalFrame {
+    
 
     /**
      * Creates new form consultaPorPrecio
      */
+    
+     private Supermercado supermercado;
+    DefaultTableModel modelo = new DefaultTableModel();
+    private void buscarPorPrecio(){
+         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+         modelo.setRowCount(0);
+        String precioMin = txtPrecioMin.getText().trim();
+        String precioMax = txtPrecioMax.getText().trim();
+      
+        if (precioMin.isEmpty() || precioMax.isEmpty()){
+         JOptionPane.showMessageDialog( this, "Ingrese valores mínimo y máximo");
+            return;
+        }
+        try{
+        double precioMinD = Double.parseDouble(precioMin);
+        double precioMaxD= Double.parseDouble(precioMax);
+            if ( precioMinD > precioMaxD) {
+            JOptionPane.showMessageDialog(this, " el precio mínimo no puede ser mayor que el máximo");
+            return;
+            }
+            List<Producto> resultado = supermercado.buscarPorPrecio(precioMinD, precioMaxD);
+           if ( resultado.isEmpty()){
+            JOptionPane.showMessageDialog(this, "No se encontró producto");
+                    }
+             else {
+             for ( Producto p : resultado){
+                 modelo.addRow(new Object []{
+                     p.getCodigo(),
+                     p.getDescripcion(),
+                     p.getPrecio(),
+                     p.getRubro(),
+                    0
+                 });
+                } 
+            }
+        }catch(NumberFormatException ex ){
+            JOptionPane.showMessageDialog(this,"Ingrese un valor válido");
+               }
+        }
+        
     public consultaPorPrecio() {
         initComponents();
         DeTodoSA.rellenarCabecerasTablas(jTable1);
