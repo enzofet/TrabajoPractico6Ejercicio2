@@ -21,7 +21,7 @@ public class consultaPorPrecio extends javax.swing.JInternalFrame {
      * Creates new form consultaPorPrecio
      */
     
-     private Supermercado supermercado;
+    private Supermercado supermercado;
     DefaultTableModel modelo = new DefaultTableModel();
     private void buscarPorPrecio(){
          DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
@@ -51,17 +51,27 @@ public class consultaPorPrecio extends javax.swing.JInternalFrame {
                      p.getDescripcion(),
                      p.getPrecio(),
                      p.getRubro(),
-                    0
+                     p.getStock(),
                  });
                 } 
             }
         }catch(NumberFormatException ex ){
             JOptionPane.showMessageDialog(this,"Ingrese un valor válido");
-               }
+            }
         }
         
-    public consultaPorPrecio() {
+    public consultaPorPrecio(Supermercado supermercado) {
         initComponents();
+        this.supermercado = supermercado;
+        
+        modelo = new DefaultTableModel(new Object[]{"Codigo", "Descripcion", "Precio", "Categoria", "Stock"}, 0) {  
+            @Override
+            public boolean isCellEditable(int row, int colum) {
+                return false;
+            }
+        
+            
+        };
         DeTodoSA.rellenarCabecerasTablas(jTable1);
     }
 
@@ -83,6 +93,7 @@ public class consultaPorPrecio extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnSalir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setResizable(true);
 
@@ -121,6 +132,13 @@ public class consultaPorPrecio extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -142,7 +160,9 @@ public class consultaPorPrecio extends javax.swing.JInternalFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPrecioMax, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 121, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addGap(0, 38, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,12 +174,13 @@ public class consultaPorPrecio extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(txtPrecioMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrecioMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(25, 25, 25)
+                    .addComponent(jLabel3)
+                    .addComponent(jButton1))
+                .addGap(22, 22, 22)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSalir)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -182,9 +203,14 @@ public class consultaPorPrecio extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        buscarPorPrecio();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
