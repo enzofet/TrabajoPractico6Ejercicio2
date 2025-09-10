@@ -4,8 +4,11 @@
  */
 package visuales;
 
+import classes.Producto;
 import classes.Rubro;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,12 +19,22 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
     /**
      * Creates new form consultaPorRubro
      */
-    DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+    DefaultTableModel modelo = new DefaultTableModel();
+
+    public void FiltrarRubro(ArrayList<Producto> productos) {
+        modelo = (DefaultTableModel) tblRubros.getModel();
+        modelo.setRowCount(0);
+        for (Producto p : productos) {
+            modelo.addRow(new Object[]{p.getCodigo(), p.getDescripcion(), p.getPrecio(), p.getRubro(), p.getStock()});
+        }
+    }
+
     public consultaPorRubro() {
         initComponents();
         DeTodoSA.rellenarCabecerasTablas(tblRubros);
-        modelo = (DefaultComboBoxModel) cmbRubros.getModel();
         DeTodoSA.rellenarComboBox(cmbRubros);
+        modelo = (DefaultTableModel) tblRubros.getModel();
+      
     }
 
     /**
@@ -49,6 +62,16 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
         jLabel2.setText("Rubro:");
 
         cmbRubros.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
+        cmbRubros.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbRubrosItemStateChanged(evt);
+            }
+        });
+        cmbRubros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbRubrosActionPerformed(evt);
+            }
+        });
 
         tblRubros.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
         tblRubros.setModel(new javax.swing.table.DefaultTableModel(
@@ -129,6 +152,32 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void cmbRubrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbRubrosActionPerformed
+
+        String seleccion = (String) cmbRubros.getSelectedItem();
+        
+        ArrayList<Producto> filtrado= new ArrayList<>();
+        filtrado.clear();
+        switch (seleccion) {
+            case "Limpieza":
+                filtrado = DeTodoSA.supermercado.buscarProductosRubro(Rubro.LIMPIEZA);
+                break;
+            case "Comestible":
+                filtrado = DeTodoSA.supermercado.buscarProductosRubro(Rubro.COMESTIBLE);
+                break;
+            case "Perfumeria":
+                filtrado = DeTodoSA.supermercado.buscarProductosRubro(Rubro.PERFUMERIA);
+                break;
+
+        }
+        FiltrarRubro(filtrado);
+    }//GEN-LAST:event_cmbRubrosActionPerformed
+
+    private void cmbRubrosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbRubrosItemStateChanged
+
+
+    }//GEN-LAST:event_cmbRubrosItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalir;
@@ -139,4 +188,5 @@ public class consultaPorRubro extends javax.swing.JInternalFrame {
     private javax.swing.JPanel pnlBuscarRubro;
     private javax.swing.JTable tblRubros;
     // End of variables declaration//GEN-END:variables
+
 }
