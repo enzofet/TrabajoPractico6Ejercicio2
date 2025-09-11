@@ -6,8 +6,10 @@ package visuales;
 
 import classes.Producto;
 import classes.Supermercado;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,37 +21,39 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
     /**
      * Creates new form consultaPorNombre
      */
-    private Supermercado supermercado;
     DefaultTableModel modelo = new DefaultTableModel();
-    private void buscarPorNombre(){
-         DefaultTableModel modelo = (DefaultTableModel) jtblProductos.getModel();
-         modelo.setRowCount(0);
-        String nombre = txtDescripcion.getText().trim();
-        if ( nombre.isEmpty()){
-            JOptionPane.showMessageDialog(this, "Ingrese nombre producto");
-            return;
-     
+
+    private void buscarPorNombre() {
+        DefaultTableModel modelo = (DefaultTableModel) jtblProductos.getModel();
+        modelo.setRowCount(0);
+        String introducido = txtDescripcion.getText().toLowerCase();
+        ArrayList<Producto> filtrado = new ArrayList<>();
+        for(Producto p : DeTodoSA.supermercado.getCatalogo()){
+            if(p.getDescripcion().toLowerCase().startsWith(introducido)){
+                filtrado.add(p);
+            }
+            
         }
-        List<Producto> encontrados = supermercado.buscarPorNombre(nombre);
-         if ( encontrados.isEmpty()){
-            JOptionPane.showMessageDialog(this, "No se encontró producto");
-         }
-         else {
-             for ( Producto p : encontrados){
-                 modelo.addRow(new Object []{
-                     p.getCodigo(),
-                     p.getDescripcion(),
-                     p.getPrecio(),
-                     p.getRubro(),
-                    p.getStock(),
-                 });
-             }
-         }
+        rellenarTabla(filtrado);
+        
+        
+
     }
+
+    private void rellenarTabla(ArrayList<Producto> productos) {
+        modelo = (DefaultTableModel) jtblProductos.getModel();
+        modelo.setRowCount(0);
+        for (Producto p : productos) {
+            modelo.addRow(new Object[]{p.getCodigo(), p.getDescripcion(), 
+                p.getPrecio(), 
+                p.getRubro(), p.getStock()});
+        }
+    }
+
     public consultaPorNombre() {
         initComponents();
-        this.supermercado = DeTodoSA.supermercado;
         DeTodoSA.rellenarCabecerasTablas(jtblProductos);
+        rellenarTabla(new ArrayList<>(DeTodoSA.supermercado.getCatalogo()));
     }
 
     /**
@@ -68,15 +72,14 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
         jtblProductos = new javax.swing.JTable();
         lblInstruccion = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
-        btnBuscarPorNombre = new javax.swing.JButton();
 
         lblTitulo.setFont(new java.awt.Font("URW Gothic", 1, 24)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Listado por Nombre");
 
-        txtDescripcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescripcionActionPerformed(evt);
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyReleased(evt);
             }
         });
 
@@ -91,6 +94,7 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
 
             }
         ));
+        jtblProductos.setFocusable(false);
         jScrollPane2.setViewportView(jtblProductos);
 
         lblInstruccion.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
@@ -101,14 +105,6 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
-            }
-        });
-
-        btnBuscarPorNombre.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
-        btnBuscarPorNombre.setText("Buscar");
-        btnBuscarPorNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarPorNombreActionPerformed(evt);
             }
         });
 
@@ -132,9 +128,7 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
                 .addComponent(lblInstruccion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBuscarPorNombre)
-                .addGap(61, 61, 61))
+                .addGap(138, 138, 138))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,12 +136,10 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
                 .addGap(22, 22, 22)
                 .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblInstruccion, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnBuscarPorNombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblInstruccion, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSalir)
@@ -168,22 +160,24 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBuscarPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPorNombreActionPerformed
-        buscarPorNombre();
-
-    }//GEN-LAST:event_btnBuscarPorNombreActionPerformed
-
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescripcionActionPerformed
-    
+    private void txtDescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyReleased
+        try{
+        if(!txtDescripcion.getText().isEmpty()){
+        buscarPorNombre();
+        } else {
+            rellenarTabla(new ArrayList<>(DeTodoSA.supermercado.getCatalogo()));
+        }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(this, "¡Algo salió mal!", "Error", WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtDescripcionKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarPorNombre;
     private javax.swing.JButton btnSalir;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
