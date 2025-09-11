@@ -9,6 +9,7 @@ import classes.Rubro;
 import classes.Supermercado;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,6 +22,7 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
      * Creates new form gestionDeProductos
      */
     DefaultTableModel modelo = new DefaultTableModel();
+    SpinnerNumberModel modeloSpinner = new SpinnerNumberModel(0, 0, null, 1);
     private Producto productoActual = null;
 
     private void habilitarGuardar() {
@@ -186,6 +188,7 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
         DeTodoSA.rellenarCabecerasTablas(tablaProductos);
         DeTodoSA.rellenarComboBox(comboBoxRubro);
         DeTodoSA.rellenarComboBox(comboBoxFiltrarCategoria);
+        stockSpinner.setModel(modeloSpinner);
         rellenarTabla(new ArrayList<>(supermercado.getCatalogo()));
         this.setClosable(true);
         this.setResizable(true);
