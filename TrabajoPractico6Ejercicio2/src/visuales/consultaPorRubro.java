@@ -7,7 +7,6 @@ package visuales;
 import classes.Producto;
 import classes.Rubro;
 import java.util.ArrayList;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**

@@ -24,7 +24,8 @@ public class DeTodoSA extends javax.swing.JFrame {
     /**
      * Creates new form A
      */
-
+    
+    
     public static void rellenarComboBox(JComboBox box){
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) box.getModel();
         Rubro[] lista = Rubro.values();
@@ -34,13 +35,19 @@ public class DeTodoSA extends javax.swing.JFrame {
     }
     
     public static void rellenarCabecerasTablas(JTable tabla){
-        DefaultTableModel modelo = new DefaultTableModel();
+        DefaultTableModel modelo = new DefaultTableModel(){
+        @Override
+            public boolean isCellEditable(int row, int colum) {
+                return false;
+            }
+        };
         modelo.addColumn("Codigo");
         modelo.addColumn("Descripción");
         modelo.addColumn("Precio");
         modelo.addColumn("Categoría");
         modelo.addColumn("Stock");
         tabla.setModel(modelo);
+        
     }
     
     public DeTodoSA() {

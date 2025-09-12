@@ -261,6 +261,7 @@ public class gestionDeProductos extends javax.swing.JInternalFrame {
 
             }
         ));
+        tablaProductos.setRowSelectionAllowed(false);
         paneProductos.setViewportView(tablaProductos);
 
         panelProductos.setBorder(javax.swing.BorderFactory.createEtchedBorder());

@@ -94,7 +94,6 @@ public class consultaPorNombre extends javax.swing.JInternalFrame {
 
             }
         ));
-        jtblProductos.setFocusable(false);
         jScrollPane2.setViewportView(jtblProductos);
 
         lblInstruccion.setFont(new java.awt.Font("URW Gothic", 0, 13)); // NOI18N
