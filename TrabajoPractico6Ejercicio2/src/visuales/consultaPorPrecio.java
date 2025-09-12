@@ -63,16 +63,9 @@ public class consultaPorPrecio extends javax.swing.JInternalFrame {
     public consultaPorPrecio(Supermercado supermercado) {
         initComponents();
         this.supermercado = supermercado;
-        
-        modelo = new DefaultTableModel(new Object[]{"Codigo", "Descripcion", "Precio", "Categoria", "Stock"}, 0) {  
-            @Override
-            public boolean isCellEditable(int row, int colum) {
-                return false;
-            }
-        
-            
-        };
         DeTodoSA.rellenarCabecerasTablas(jTable1);
+        
+        
     }
 
     /**
